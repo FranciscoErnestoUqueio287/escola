@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/arquivosdaescola/mystyle.css"/><style>
+h2{color:#800000}
+h1{color:#800000}
+h2:hover{color:#800000}
+h1:hover{color:#800000}</style></head>
+<body><form method="post" enctype='multipart/form-data' class="aluno-form"> <h1>{{erro}}<h1><br> {% csrf_token %}<br>
+<h2>Referencia:</h2> <br><input type="text" class="text" name="referencia" maxlength="100" required id="id_referencia"><br>
+<h2>Director de turma:</h2><br> <input type="text" class="text" name="director_de_turma" maxlength="100" required id="id_chefe_de_turma"> <br>
+<h2>Chefe de turma:</h2><br><input type="text" class="text" name="chefe_de_turma" maxlength="100" required id="id_chefe_de_turma"> <br>
+<h2>Classe:</h2><br> <input type="number" name="classe" class="text" min="8" max="12" required id="id_classe"><br>
+<h2>Sala:</h2><br> <input type="number" name="sala" class="text" min="1" max="33" id="id_classe"><br>
+<h2>Turno:</h2><br><select class="text" name="turno" required id="id_turno"><option value="Diurno" selected>Diurno</option>  <option value="Noturno">Noturno</option></select><br>
+<h2>Imagem:</h2> <br> <input type="file" class="text" name="imagem" accept="image/*" id="id_imagem"> <br>
+<h2>Palavra-passe:</h2><br> <input type="password" class="text" name="password" maxlength="100" required id="id_password"> <br>
+<h2>Confirmacao da palavra passe:</h2><br> <input type="password" class="text" name="password2" maxlength="100" required id="id_password">
+<br><input type="submit" value="Subscrever-me" class="text">
+</form></body>
+</html>

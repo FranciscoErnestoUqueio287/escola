@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/arquivosdaescola/mystyle.css"/>
+<script></script><style>
+form{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-areas:"one two three";background-color:cyan}
+h2{grid-area:one;color:#800000}
+.c{grid-area:two}
+
+button{grid-area:three;width:100%;height:100%}
+</style></head> 
+<body><a href={% url 'paginainicial' %}><button>Ir para a pagina inicial</button></a><br>
+<a href={% url 'professor_dentro' user.slug %}><button>Voltar <--</button></a><br><br>
+<form method="post">  {% csrf_token %} <input type="hidden" value="nome" name="group"> <h2>Nome:</h2><input type="text" name="thevalue" value="{{user.nome}}" class="c">  <button>Alterar</button></form>
+<br><form method="post">  {% csrf_token %} <input type="hidden" value="idade" name="group"> <h2> Data de nascimento <br>:{{user.data_de_nascimento|date:"Y-M-d"}}</h2><input type="date" name="thevalue" value="{{user.data_de_nascimento|date:"Y-M-d"}}" class="c">  <button>Alterar</button></form>
+<br><form method="post">  {% csrf_token %} <input type="hidden" value="contacto" name="group"> <h2> Contacto:</h2><input type="text" name="thevalue" value="{{user.contacto}}" class="c">  <button>Alterar</button></form>
+<br><form method="post">  {% csrf_token %} <input type="hidden" value="turma" name="group"> <h2> Turmas:</h2><input type="text" name="thevalue" value="{{user.turmas}}" class="c">  <button>Alterar</button></form>
+<br><form method="post">  {% csrf_token %} <input type="hidden" value="classe" name="group"> <h2> Classes:</h2><input type="text" name="thevalue" value="{{user.classes}}" class="c">  <button>Alterar</button></form>
+<br><form method="post" enctype="multipart/form-data">  {% csrf_token %} <input type="hidden" value="imagem" name="group"> <h2> Sua imagem de face:<img src={{user.imagem.url}} width=100%  height=100%% class="c"></h2> <input type="file" class="text" name="thevalue" accept="image/*">  <button>Alterar</button></form>
+<br><form method="post">  {% csrf_token %} <input type="hidden" value="password" name="group"> <h2> Tua password:</h2><input type="password" name="thevalue" value="{{user.password}}" class="c">  <button>Alterar</button></form>
+</body>
+</html>

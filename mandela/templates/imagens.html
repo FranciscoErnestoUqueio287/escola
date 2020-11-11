@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/arquivosdaescola/mystyle.css"/>
+<script>
+</script>
+<style> 
+body{background-color:#800000}
+ h3{color:aqua;text-align:center;font-family:Lucida Calligraphy;font-size:25px;font-weight:bold}
+h2{color:aqua;position:justify;text-align:center;font-family:Lucida Calligraphy;font-size:25px;font-weight:bold}
+fbutton{background-color:#2f6f71;color:aqua;border-radius:15px;height:20%;width:100%;font-size:100%;font-family:Lucida Calligraphy;font-weight:bold;box-shadow:-8px 8px 8px #cbced1, 8px 8px 8px #fff;}
+button{width:100%}
+</style>
+</head>
+<body><a href={% url 'paginainicial' %}><button>Ir para a pagina inicial</button></a> <br><br> 
+ <br>
+{% if imagens|length > 0 %} {% for x in imagens %}<img src={{x.imagem.url}} width=100% height=100% ><br> {% endfor %}{% else %}<h2>Nenhuma imagem carregada</h2>{% endif %}
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/arquivosdaescola/mystyle.css"/>
+<script>
+</script>
+<style> 
+form{background-color:orange}
+body{background-color:#800000}
+ h3{color:aqua;text-align:center;font-family:Lucida Calligraphy;font-size:25px;font-weight:bold}
+h2{color:aqua;position:justify;text-align:center;font-family:Lucida Calligraphy;font-size:25px;font-weight:bold}
+fbutton{background-color:#2f6f71;color:aqua;border-radius:15px;height:20%;width:100%;font-size:100%;font-family:Lucida Calligraphy;font-weight:bold;box-shadow:-8px 8px 8px #cbced1, 8px 8px 8px #fff;}
+button{width:100%}
+</style>
+</head>
+<body><a href={% url 'paginainicial' %}><button>Ir para a pagina inicial</button></a> <br><br> 
+ <br>
+<a href={% url 'professor_dentro' user.slug %}><button>Voltar <----</button></a>
+<h2>Trabalhos</h2>
+<br>
+<h2 style="color:cadetblue">{{sucesso}}</h2> <br>
+{% if mcom|length > 0 %}
+<h2>Meus trabalhos</h2>
+{% for x in mcom %}<h2>{{x}}:</h2><br>
+{% if x.comunicado|length > 0 %}<h2>{{x.comunicado|truncatechars:30}}</h2> <br> {% endif %} {% if x.arquivo|length > 0 %} <br><a href="{{x.arquivo.url}}" ><button>Baixar o arquivo: {{x.arquivo}} </button> </a>{% endif %} <a href="commfgjk{{x.id}}"><button>Ver</button></a> {% endfor %} {% else %} <h2>Nenhum comunicado seu</h2> {% endif %}
+<form enctype="multipart/form-data" method="post"> {% csrf_token %}
+<h2>Deseja criar um trabalho?<br>Preencha o formulario abaixo<br></h2>
+<h4>Trabalho: <input type="textarea" class="text" name="comunicado" value=""></h4>
+<h4>Anexar arquivo: <input type="file" class="text" name="arquivo"></h4> <br>
+<input type="submit" value="Comunicar" class="mess">
+</form>
+{% if com|length > 0 %}
+{% for x in com %}<h2>{{x}}:</h2><br>
+{% if x.comunicado|length > 0 %}<h2>{{x.comunicado|truncatechars:30}}</h2> <br> {% endif %} {% if x.arquivo|length > 0 %} <br><a href="{{x.arquivo.url}}" ><button>Baixar o arquivo: {{x.arquivo}} </button> <a/> {% endif %}  <a href="commfgjk{{x.id}}"><button>Ver</button></a>{% endfor %} {% else %} <h2>Nenhum comunicado</h2> {% endif %}</body>
+</html>

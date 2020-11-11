@@ -1,0 +1,24 @@
+#other{width:width:10%;height:200} button{background-color:#3398b4;font-weight:bold;color:lightblack;border-radius:7px;width:20%;font-family:"Courier";} button:hover{font-size:20px;font-weight:bold;background-color:#00ff95;border-radius:50px 15px} nav{text-align:right;}
+.im{border-radius:15px;width:80%}  #375867 bod-f{background-color:#eeddff} body{background-color:#800000}
+h1{color:darkcyan}
+h2{color:darkcyan;font-family:"Lucida Calligraphy"}
+button.loget:hover{background-color:#1cc830;color:red} button.loget{background-color:#fa9e14;color:#4c9cbe;border-radius:15px;font-family:Lucia Console;font-weight:bold;font-size:48px;width:100%;height:200}
+.aluno-form{background-color:#189a6a;border-radius:50px 5px;box-shadow:5px 30px #185b9a;width:50%;margin-left:25%;margin-right:25%;text-align:center;items-align:center}
+.aluno-form:hover{background-color:rgba(24,154,106,0.6);box-shadow:5px 50px #189a6a}
+.aluno-form h2{brown}
+h2:hover{color:#56e0dd}
+.text{background-color:#ed900f;border-radius:15px 0px}
+form{background-color:deepskyblue;border-radius:15px;width:50%;margin-left:25%;margin-right:25%;text-align:center}
+form:hover{background-color:orange}
+.but{background-color:orange;color:black;border-radius:15px}
+.but:hover{background-color:yellow}
+section.con{display:grid;grid-template-columns:1fr 1fr;grid-template-areas:'conversas contactos';border-radius:75px 15px;background:#f8f8ff}
+section form .search{background-color:white;font-weight:bolder;width:75%;border-radius:15px;font-family:courier}
+section form{background-color:rgba(250,250,250,0.1);margin-left:0%;border-radius:15px;width:100%}
+section form:hover{background-color:#800000}
+section form .search-bar{background-color:#3398b4;color:red;border-radius:7px;width:20%;font-family:"Courier";} 
+s-align{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr;grid-template-areas:"first second"}
+.search-bar:hover{font-size:20px;font-weight:bold;background-color:#3398b4;border-radius:50px 15px}
+
+.mess{background-color:#3398b4;font-weight:bold;color:lightblack;border-radius:7px;width:20%;font-family:"Courier";} 
+.mess:hover{font-size:20px;font-weight:bold;background-color:#00ff95;border-radius:50px 15px}

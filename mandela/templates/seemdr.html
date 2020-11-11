@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/arquivosdaescola/mystyle.css"/>
+<script>
+</script>
+<style> 
+body{background-color:darkcyan}
+form{background-color:#f8f8ff}
+form:hover{background-color:#f0f0ff}
+h2:hover{color:#800000} h3{color:#800000;text-align:left;font-family:Lucida Calligraphy;font-size:25px;font-weight:bold}
+.e{text-align:rigth}
+h2{color:#800000;position:justify;text-align:center;font-family:Lucida Calligraphy;font-size:25px;font-weight:bold}
+.mess{text-align:rigth;background-color:#3398b4;font-weight:bold;color:lightblack;border-radius:7px;width:40%;font-family:"Courier";} 
+.mess:hover{font-size:20px;font-weight:bold;background-color:#00ff95;border-radius:50px 15px}
+.mes{text-align:left;background-color:#3398b4;font-weight:bold;color:lightblack;border-radius:7px;width:40%;font-family:"Courier";} 
+.mes:hover{font-size:20px;font-weight:bold;background-color:#00ff95;border-radius:50px 15px}
+.b{background-color:#2f6f71;color:color:#800000;border-radius:15px;height:20%;width:100%;font-size:100%;font-family:Lucida Calligraphy;font-weight:bold;box-shadow:-8px 8px 8px #cbced1, 8px 8px 8px #fff;}
+.b:hover{color:red}
+form{background-color:#00ff95}
+form:hover{background-color:#00ff95}
+</style>
+</head>
+<body><a href={% url 'paginainicial' %}><button>Ir para a pagina inicial</button></a> <br><br>
+ <a href={% url 'directoria_dentro' user.slug %}><button>Voltar <----</button></a> <br>
+<h2>Bem-vindo a sua caixa de messagens</h2><br>
+<h2>{{messagem}}<h2><br>
+{% if user.id == messagem.de and messagem.de2 == "directoria" %}<h2>Eu-->: </h2>
+{% if messagem.messagem.conteudo|length > 0 %}<button class="mess">{{messagem.messagem.conteudo}}</button><br> {% endif %}
+{% if messagem.messagem.arquivo|length > 0 %}
+<button class="mess">Baixar arquivo <a href="{{messagem.messagem.arquivo.url}}">{{messagem.messagem.arquivo}}</a></button>{% endif %} 
+{% else %} <h2>:<--Ele/Ela</h2>
+{% if messagem.messagem.conteudo|length > 0 %}<button class="mess">{{messagem.messagem.conteudo}}</button><br> {% endif %}
+{% if messagem.messagem.arquivo|length > 0 %}
+<button class="mes">Baixar arquivo <a href="{{messagem.messagem.arquivo.url}}">{{messagem.messagem.arquivo}}</a></button>{% endif %}{% endif %} <br>
+<form enctype="multipart/form-data" name='forma' method="post"><h2>Enviar messagem:</h2><input type="text" class="text" name="conteudo" value="">
+<h2>Anexar arquivo</h2> <input type="file" class="text" name="arquivo"> <br>
+{% csrf_token %} <input type="submit" value="Enviar">
+</form>
+<h2>Outras messagens<h2><br>
+{% for messagem in conversas %}
+{% if user.id == messagem.de and messagem.de2 == "directoria" %} <h2>Eu-->:</h2>
+{% if messagem.messagem.conteudo|length > 0 %}<button class="mess">{{messagem.messagem.conteudo}}</button><br> {% endif %}
+{% if messagem.messagem.arquivo|length > 0 %}
+<button class="mess">Baixar arquivo <a href="{{messagem.messagem.arquivo.url}}">{{messagem.messagem.arquivo}}</a></button>{% endif %} 
+{% else %} <h2>:<--Ele/Ela</h2>
+{% if messagem.messagem.conteudo|length > 0 %}<button class="mess">{{messagem.messagem.conteudo}}</button><br> {% endif %}
+{% if messagem.messagem.arquivo|length > 0 %}
+<button class="mes">Baixar arquivo <a href="{{messagem.messagem.arquivo.url}}">{{messagem.messagem.arquivo}}</a></button>{% endif %}{% endif %} <br>
+{% endfor %}
+
+</body>
+</html>

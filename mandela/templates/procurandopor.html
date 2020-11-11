@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/arquivosdaescola/mystyle.css"/>
+<script>
+var files = "/arquivosdaescola/my.png";
+{% for x in imagens %}
+files += " " + "{{x.imagem.url}}";
+{% endfor %}
+files = files.split(" ");
+var ind = 0;
+function MyFunction()
+{if (ind >= 0 && ind < files.length){document.img.src = files[ind];}
+else{ ind=0;document.img.src = files[ind];}
+ind+=1;};
+function MyFunctionb()
+{if (ind >= 0 && ind < files.length) {document.img.src = files[ind];}
+else{ind=0;document.img.src = files[ind];}ind-=1;}
+</script> 
+</head>
+<body><header><nav><a href="/sobreaescola/"><button>Sobre a escola</button></a><a href="/comunicados/"><button>Comunicados</button></a><a href="/entrar/"><button>Entrar</button></a><a href="/imagensdaescola/"><button>Imagens da escola</button></a><a href="/aluno/"><button>Registrar-me como aluno</button></a></nav> <img src="/arquivosdaescola/EE.png"  id="other" height=300 onclick="MyFunctionb()"></img><img name="img"class="im" height=300 onclick="FuncImg()" src="/arquivosdaescola/myimg.png"><img><img src="/arquivosdaescola/RR.png" height=300 id="other" onclick="MyFunction()"></img></header> 
+<section> <form class="fuck" method="post"><input type="search" name="procurar" placeholder="Procure aqui" value={{searched}} class="search"><input type="submit" value="Procurar" class='search-bar'></form> 
+{% if trabalhos|length > 0 %}<h1>Trabalho</h2><br> {% for x in trabalhos %} <section style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr;grid-template-areas:'first second'"><h2>{{x.comunicado}}<br>{% if x.arquivo.url|length > 0 %} <a href={{x.arquivo.url}}><button>Baixar arquivo {{x.arquvio}}</button> </a> {% else %}{% endif %}<h2 style="grid-area:"second">Nome:{{x.data_de_criacao}}<br>Publicado por:{{x.comunicando}}<br></section>{% endfor %} {% else %} {% endif %}<br><br><br>
+{% if comunicados|length > 0 %}<h2>Comunicados</h2>{% for x in comunicados %} <section style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr;grid-template-areas:'first second'"><h2>{{x.comunicado}}<br>{% if x.arquivo.url|length > 0 %} <a href={{x.arquivo.url}}><button>Baixar arquivo {{x.arquvio}}</button> </a> {% else %}{% endif %}<h2 style="grid-area:"second">Nome:{{x.data_de_criacao}}<br>Publicado por:{{x.comunicando}}<br></section>{% endfor %} {% else %} {% endif %}<br><br><br>
+{% if turmas|length > 0 %}<h1>Turmas</h2><br> {% for x in turmas %} <section style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr;grid-template-areas:'first second'">{% if x.imagem|length > 0 %}<img src={{x.imagem.url}} height=100% width=100% style="grid-area:first" />{% endif %}<h2 style="grid-area:second">Nome:{{x.referencia}}<br> classe:{{x.classe}}<sup>o</sup><br>Chefe de turma:{{x.chefe_de_turma}}<br></section>{% endfor %} {% else %} {% endif %}<br><br><br>{% if alunos|length > 0 %} <h1>Alunos</h1>
+{% for x in alunos %} <section style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr;grid-template-areas:'first second'"><img src={{x.imagem.url}} height=100% width=100% style="grid-area:first" /><h2 style="grid-area:second">Nome:{{x.nome}}<br> classe:{{x.classe}}<sup>o</sup><br>Turno:{{x.turno}}<br></section>{% endfor %} {% else %} {% endif %}<br><br><br></section>
+</body>
+</html>
