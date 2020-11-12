@@ -1,2 +1,1 @@
 django==3.0.8
-random==3
