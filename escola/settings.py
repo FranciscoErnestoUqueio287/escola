@@ -123,10 +123,10 @@ USE_TZ = True
 MEDIA_ROOT = os.path.join(BASE_DIR,"mandela","media")
 MEDIA_URL = "/arquivosdaescola/"
 STATIC_URL = '/schoolfiles/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
+#STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, 'static'),
+#)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_TMP = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
