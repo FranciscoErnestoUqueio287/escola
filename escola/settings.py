@@ -12,12 +12,13 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+WEB_CONCURRENCY = 3
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-#ERROR_400_TEMPLATE_NAME = '400.html'
-#ERROR_403_TEMPLATE_NAME = '403.html'
-#ERROR_404_TEMPLATE_NAME = '404.html'
-#ERROR_500_TEMPLATE_NAME = '500.html'
+ERROR_400_TEMPLATE_NAME = '400.html'
+ERROR_403_TEMPLATE_NAME = '403.html'
+ERROR_404_TEMPLATE_NAME = '404.html'
+ERROR_500_TEMPLATE_NAME = '500.html'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
