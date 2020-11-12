@@ -22,7 +22,7 @@ ERROR_500_TEMPLATE_NAME = '500.html'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["esnm.herokuapp.com"]
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'wd_^5s^4ln2i8tk74v@w5&phi68fy8$e8aep=prn#c!=it@2lr'
 
