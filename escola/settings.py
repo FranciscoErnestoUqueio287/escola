@@ -132,3 +132,4 @@ STATIC_URL = '/static/'
 
 os.makedirs(STATIC_TMP, exist_ok=True)
 os.makedirs(STATIC_ROOT, exist_ok=True)
+os.makedirs(NMEDIA_ROOT, exist_ok=True)

@@ -1,9 +1,9 @@
 <!doctype html>
-<html>
+<html>{% static load %}
 <head><meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/arquivosdaescola/mystyle.css"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href={% static 'mystyle.css' %}>
 <script>
-var files = "/arquivosdaescola/my.png";
+var files = "{% static 'my.png' %}";
 {% if imagens|length > 0 %}
 {% for x in imagens %}
 files += " " + "{{x.imagem.url}}";
@@ -20,7 +20,7 @@ function MyFunctionb()
 else{ind=0;document.img.src = files[ind];}ind-=1;}
 </script> 
 </head>
-<body><header><nav><a href="/sobreaescola/"><button>Sobre a escola</button></a><a href="/comunicados/"><button>Comunicados</button></a><a href="/entrar/"><button>Entrar</button></a><a href="/imagensdaescola/"><button>Imagens da escola</button></a><a href="/aluno/"><button>Registrar-me como aluno</button></a></nav> <img src="/arquivosdaescola/EE.png"  id="other" height=300 onclick="MyFunctionb()"></img><img name="img"class="im" height=300 onclick="FuncImg()" src="/arquivosdaescola/myimg.png"><img><img src="/arquivosdaescola/RR.png" height=300 id="other" onclick="MyFunction()"></img></header> <br>
+<body><header><nav><a href="/sobreaescola/"><button>Sobre a escola</button></a><a href="/comunicados/"><button>Comunicados</button></a><a href="/entrar/"><button>Entrar</button></a><a href="/imagensdaescola/"><button>Imagens da escola</button></a><a href="/aluno/"><button>Registrar-me como aluno</button></a></nav> <img src={% static 'EE.png' %}  id="other" height=300 onclick="MyFunctionb()"></img><img name="img"class="im" height=300 onclick="FuncImg()" src={% static 'myimg.png' %}><img><img src={% static 'RR.png' %} height=300 id="other" onclick="MyFunction()"></img></header> <br>
 <h2>Aluno registrados: {{a|length}}<br>
 Turmas: {{t|length}}<br>
 Professores registrados: {{p|length}}<br>
