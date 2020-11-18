@@ -1,35 +1,137 @@
-<!doctype html>
-<html>
-<head><meta charset="utf-8" />{% load static %}
-<meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="shortcut icon" href={% static 'favicon.ico' %}><link rel="stylesheet" href={% static 'mystyle.css' %}>
-<script>
-</script>
-<style> 
-form{background-color:orange}
-body{background-color:#800000}
- h3{color:aqua;text-align:center;font-family:Lucida Calligraphy;font-size:25px;font-weight:bold}
-h2{color:aqua;position:justify;text-align:center;font-family:Lucida Calligraphy;font-size:25px;font-weight:bold}
-fbutton{background-color:#2f6f71;color:aqua;border-radius:15px;height:20%;width:100%;font-size:100%;font-family:Lucida Calligraphy;font-weight:bold;box-shadow:-8px 8px 8px #cbced1, 8px 8px 8px #fff;}
-button{width:100%}
-</style>
-</head>
-<body><a href={% url 'paginainicial' %}><button>Ir para a pagina inicial</button></a> <br><br> 
- <br>
-<a href={% url 'aluno_dentro' user.slug %}><button>Voltar <----</button></a>
-<h2>Comunicados</h2>
-<br>
-<h2 style="color:cadetblue">{{sucesso}}</h2> <br>
-{% if mcom|length > 0 %}
-<h2>Meus comunicados</h2>
-{% for x in mcom %}<h2>{{x}}:</h2><br>
-{% if x.comunicado|length > 0 %}<h2>{{x.comunicado|truncatechars:30}}</h2> <br> {% endif %} {% if x.arquivo|length > 0 %} <br><a href="{{x.arquivo.url}}" ><button>Baixar o arquivo: {{x.arquivo}} </button></a> {% endif %}  <a href="commfgjk{{x.id}}"><button>Ver</button></a>{% endfor %} {% else %} <h2>Nenhum comunicado seu</h2> {% endif %}
-<form enctype="multipart/form-data" method="post"> {% csrf_token %}
-<h2>Deseja criar um comunicado?<br>Preencha o formulario abaixo<br></h2>
-<h4>Comunicado: <input type="textarea" class="text" name="comunicado" value=""></h4>
-<h4>Anexar arquivo: <input type="file" class="text" name="arquivo"></h4> <br>
-<input type="submit" value="Comunicar" class="mess">
+﻿<!doctype html>{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+  
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    
+<title>{{user.nome}} comunicados</title>
+
+   
+<link href={% static 'bootstrap.min.css' %} rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href={% static 'album.css' %} rel="stylesheet">
+  </head>
+  <body>
+    <header>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        
+<div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">Sobre</h4>
+         
+ <p class="text-muted">Adicionar comunicado</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          
+<h4 class="text-white">Contacto</h4>
+          <ul class="list-unstyled">
+        </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+  
+  <div class="container d-flex justify-content-between">
+      <a href="#" class="navbar-brand d-flex align-items-center">
+     
+   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <strong>Bem-vindo {{user.nome}}</strong>
+      </a>
+    
+<a href={% url 'paginainicial' %} ><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">Voltar a pagina inicial</button>
+    </div>
+  </div>
+</header>
+
+<main role="main">
+
+  <section class="jumbotron text-center">
+    <div class="container">
+    
+  <a href={% url 'aluno_dentro' user.slug %}><h1>Voltar a minha pagina inicial</h1></a>
+      <p class="lead text-muted">Aqui podes ver ou deletar comunicado.</p>
+      <p>
+        
+<a href={% url 'paginainicial' %} class="btn btn-primary my-2">Pagina Inicial</a>
+        
+<a href={% url 'aluno_dentro' user.slug %} class="btn btn-secondary my-2">Voltar</a>
+      </p>
+    </div>
+ 
+ </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+ 
+
+
+<form method="post" enctype="multipart/form-data"><h1 class="h3 mb-3 font-weight-normal">Deseja publicar um comunicado?, Preencha o formulario</h1>
+  <label for="inputEmail" class="sr-only">Escreva o comunicado</label>
+  {% csrf_token %}
+<input type="text" id="inputEmail" name="comunicado" class="form-control" placeholder="Comunicado" autofocus>
+  
+<label for="inputPassword" class="sr-only">Arquivo</label>
+ 
+ <input type="file" id="inputPassword" name="arquivo" class="form-control" placeholder="Arquivo">
+  <div class="checkbox mb-3">
+   
+  
+</div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Publicar</button>
 </form>
-{% if com|length > 0 %}
-{% for x in com %}<h2>{{x}}:</h2><br>
-{% if x.comunicado|length > 0 %}<h2>{{x.comunicado|truncatechars:30}}</h2> <br> {% endif %} {% if x.arquivo|length > 0 %} <br><a href="{{x.arquivo.url}}" ><button>Baixar o arquivo: {{x.arquivo}} </button></a> {% endif %} <a href="commfgjk{{x.id}}"><button>Ver</button></a> {% endfor %} {% else %} <h2>Nenhum comunicado</h2> {% endif %}</body>
-</html>
+
+
+
+<div class="row">
+        <div class="col-md-4">
+          {% if comunicados|length > 0 %} {% for x in comunicados %}<div class="card mb-4 shadow-sm">
+            
+<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>{{x.comunicando}}</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{x.comunicando|truncatechars:20}}</text></svg>
+            <div class="card-body">
+              <p class="card-text">{% if x.comunicado|length > 0 %} {{x.comunicado|truncatechars:40}}<br> {% endif %} {% if x.arquivo|length > 0 %}Baixar arquivo <a href={{x.arquivo.url}} >{{x.arquivo}}</a>{% endif %}.</p>
+    </div>
+<div class="btn-group">
+                 <a href="commfgjk{{x.id}}"> <button type="button" class="btn btn-sm btn-outline-secondary">Ver</button></a>
+                 {% if user.id == x.de and "aluno" == x.de2 %} <a href="commfgjk{{x.id}}"><button type="button" class="btn btn-sm btn-outline-secondary">Editar</button></a> {% endif %}
+                </div>
+                <small class="text-muted">{{x.data_de_criacao|date:"Y/m/d"}} as {{x.data_de_criacao|date:" H:m:s"}}</small></div> {% endfor %} {% endif %}   </div>
+  </div>
+
+</main>
+
+<footer class="text-muted">
+  <div class="container">
+  
+  <p class="float-right">
+      <a href="#">Ir ao topo</a>
+    </p>
+ 
+  <p>Escola Secundaria Nelson Mandela</p>
+  </div>
+</footer></html>

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>{% load static %}<link rel="shortcut icon" href={% static 'favicon.ico' %}><link rel="stylesheet" href={% static 'mystyle.css' %}>
+<style>h1{color:#800000}
+h2{color:#800000}</style></head>
+<body><form method="post" enctype='multipart/form-data' class="aluno-form"> <h1>{{erro}}<h1><br> {% csrf_token %}<br>
+<h2>Contacto:</h2> <br><input type="text" class="text" name="contacto" value="+258" maxlength="13" required id="id_contacto"><br>
+<h2>Palavra-passe:</h2><br> <input type="password" class="text" name="password" maxlength="100" required id="id_password"><br>
+<br><input type="submit" value="Subscrever-me" class="text">
+</form></body>
+</html>

@@ -4,10 +4,10 @@
 </style></head>
 <body><br><br><form method="post" enctype='multipart/form-data' class="form-signin"> <h1>{{erro}}<h1><br> {% csrf_token %}
 <div class="text-center mb-4">
-  <a href={% url 'aluno_dentro' user.slug %}>Voltar</a>
+  <a href={% url 'professor_dentro' user.slug %}>Voltar</a>
  {% if user.imagem|length > 0 %} <img class="mb-4" src={{user.imagem.url}} alt="" width="72" height="72"> {% endif %}
  
-   <h1 class="h3 mb-3 font-weight-normal">Minha turma {{user.turma}}: {{user.nome}}</h1>
+   <h1 class="h3 mb-3 font-weight-normal">Minhas turmas {{user.turmas}}: {{user.nome}}</h1>
   </div><div class="form-label-group">
 <h2>Referencia:</h2> <br><input type="text" class="form-control" name="referencia" maxlength="100" required id="id_referencia">
 <h2>Director de turma:</h2><br> <input type="text" class="form-control" name="director_de_turma" maxlength="100" required id="id_chefe_de_turma">

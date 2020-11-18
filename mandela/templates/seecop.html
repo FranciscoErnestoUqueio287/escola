@@ -6,12 +6,9 @@
 <script>
 </script>
 <style> 
-body{background-color:darkcyan}
 form{background-color:#f8f8ff}
 form:hover{background-color:#f0f0ff}
-h2:hover{color:#800000} h3{color:#800000;text-align:left;font-family:Lucida Calligraphy;font-size:25px;font-weight:bold}
 .e{text-align:rigth}
-h2{color:#800000;position:justify;text-align:center;font-family:Lucida Calligraphy;font-size:25px;font-weight:bold}
 .mess{text-align:rigth;background-color:#3398b4;font-weight:bold;color:lightblack;border-radius:7px;width:40%;font-family:"Courier";} 
 .mess:hover{font-size:20px;font-weight:bold;background-color:#00ff95;border-radius:50px 15px}
 .mes{text-align:left;background-color:#3398b4;font-weight:bold;color:lightblack;border-radius:7px;width:40%;font-family:"Courier";} 
@@ -22,14 +19,14 @@ form{background-color:#00ff95}
 form:hover{background-color:#00ff95}
 </style>
 </head>
-<body><a href={% url 'paginainicial' %}><button>Ir para a pagina inicial</button></a> <br><br>
- <a href={% url 'com_professor' user.slug %}><button>Voltar <----</button></a> <br>
+<body><a href={% url 'paginainicial' %}><button class="btn btn-lg btn-primary btn-block">Ir para a pagina inicial</button></a> <br><br>
+ <a href={% url 'com_professor' user.slug %}><button class="btn btn-lg btn-primary btn-block">Voltar <----</button></a> <br>
 <h2>Bem-vindo ao comunicado de {{com.comunicando}}</h2><br>
 <h2>Publicado por:{{com.comunicando}}<br>
 Publicando em :{{com.data_de_criacao|date:"d/m/Y"}}<br>
 {% if com.comunicado|length > 0 %}Informou: {{com.comunicado}}<br>{% endif %}<br>
-{% if com.arquivo|length > 0 %}Arquivo: <a href="{{com.arquivo.url}}"><button class="mes">{{com.arquivo}}</button></a>{% endif %}
+{% if com.arquivo|length > 0 %}Arquivo: <a href="{{com.arquivo.url}}"><button class="btn btn-lg btn-primary btn-block">{{com.arquivo}}</button></a>{% endif %}
 <br>Publicado por um:{{com.de2}}</h2><br>
-<form method="post">{% csrf_token %}{% if user.id == com.de and com.de2 == "professor" %}<input type="hidden" name="yes" value="{{com.id}}"> <button>Deletar</button>{% endif %}</form> 
+<form method="post">{% csrf_token %}{% if user.id == com.de and com.de2 == "professor" %}<input type="hidden" name="yes" value="{{com.id}}"> <button class="btn btn-lg btn-primary btn-block">Deletar</button>{% endif %}</form> 
 </body>
 </html>

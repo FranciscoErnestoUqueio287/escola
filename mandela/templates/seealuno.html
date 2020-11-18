@@ -4,13 +4,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>{% load static %}<link rel="shortcut icon" href={% static 'favicon.ico' %}><link rel="stylesheet" href={% static 'mystyle.css' %}>
 <script></script><style>
 form{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-areas:"one two three";background-color:cyan}
-h2{grid-area:one;color:#800000}
-.c{grid-area:two}
-h2{color:aqua}
-button{grid-area:three;width:100%;height:100%}
 </style></head> 
-<body><a href={% url 'paginainicial' %}><button>Ir para a pagina inicial</button></a><br>
-<a href={% url 'aluno_dentro' user.slug %}><button>Voltar <--</button></a><br><br><br>
+<body><a href={% url 'paginainicial' %}><button class="btn btn-lg btn-primary btn-block">Ir para a pagina inicial</button></a><br>
+<a href={% url 'aluno_dentro' user.slug %}><button class="btn btn-lg btn-primary btn-block">Voltar <--</button></a><br><br><br>
 <h2>Numero de processo: {{us.numero_de_processo}}<br>
 Nome: {{us.nome}}<br>
 Data de nascimento: {{us.data_de_nascimento|date:"Y-M-d"}}<br>

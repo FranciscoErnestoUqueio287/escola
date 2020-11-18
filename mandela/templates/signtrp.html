@@ -2,8 +2,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1"/>{% load static %}<link rel="shortcut icon" href={% static 'favicon.ico' %}><link rel="stylesheet" href={% static 'mystyle.css' %}>
 <style>
-dh2{color:#800000}
-dh1{color:#800000}</style></head>
-<body><a href={% url 'professor_dentro' user.slug %}><button>Voltar <--</button></a><a href="tcreate/"><button>Criar uma turma</button></a>{% if turmas|length > 0 %} {% for x in turmas %} <h2>Turma: {{x.referencia}}<br>Director de turma: {{x.director_de_turma}}<br>Classe: {{x.classe}}<sup>o</sup><br>Sala: {{x.sala}}</h2><a href="{{x.slug}}"><button>Ver mais sobre: {{x.referencia}}</button></a><br>{% endfor %} {% endif %}
+</style></head>
+<body><a href={% url 'professor_dentro' user.slug %}><button class="btn btn-lg btn-primary btn-block">Voltar <--</button></a><a href="tcreate/"><button class="btn btn-lg btn-primary btn-block">Criar uma turma</button></a>{% if turmas|length > 0 %} {% for x in turmas %} <h2>Turma: {{x.referencia}}<br>Director de turma: {{x.director_de_turma}}<br>Classe: {{x.classe}}<sup>o</sup><br>Sala: {{x.sala}}</h2><a href="{{x.slug}}"><button class="btn btn-lg btn-primary btn-block">Ver mais sobre: {{x.referencia}}</button></a><br>{% endfor %} {% endif %}
 </body>
 </html>

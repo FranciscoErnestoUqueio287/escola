@@ -1,32 +1,118 @@
-<!doctype html>
-<html>{% load static %}
-<head><meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1"/>{% load static %}<link rel="shortcut icon" href={% static 'favicon.ico' %}><link rel="stylesheet" href={% static 'mystyle.css' %}>
-<script>
-var files = {% static 'my.png' %};
-{% if imagens|length > 0 %}
-{% for x in imagens %}
-files += " " + "{{x.imagem.url}}";
-{% endfor %}
-{% endif %}
-files = files.split(" ");
-var ind = 0;
-function MyFunction()
-{if (ind >= 0 && ind < files.length){document.img.src = files[ind];}
-else{ ind=0;document.img.src = files[ind];}
-ind+=1;};
-function MyFunctionb()
-{if (ind >= 0 && ind < files.length) {document.img.src = files[ind];}
-else{ind=0;document.img.src = files[ind];}ind-=1;}
-</script> 
-</head>
-<body><header><nav><a href="/sobreaescola/"><button>Sobre a escola</button></a><a href="/comunicados/"><button>Comunicados</button></a><a href="/entrar/"><button>Entrar</button></a><a href="/imagensdaescola/"><button>Imagens da escola</button></a><a href="/aluno/"><button>Registrar-me como aluno</button></a></nav> <img src={% static 'EE.png' %}  id="other" height=300 onclick="MyFunctionb()"></img><img name="img"class="im" height=300 onclick="FuncImg()" src={% static 'myimg.png' %}><img><img src={% static 'RR.png' %} height=300 id="other" onclick="MyFunction()"></img></header> <br>
-<h2>Aluno registrados: {{a|length}}<br>
-Turmas: {{t|length}}<br>
-Professores registrados: {{p|length}}<br>
-Comunicados: {{comunicados|length}}<br>
-Trabalhos: {{tr|length}}<br>
-Pessoal da directoria registrada: {{d|length}}</h2>
-<section> <form class="fuck" method="post"><input type="search" name="procurar" placeholder="Procure aqui" class="search"><input type="submit" value="Procurar" class='search-bar'></form> <br><br><section>
-</body>
-</html>
+<!DOCTYPE html>
+{% load static %}
+<html lang="en"><head>
+    <meta charset="utf-8">
+   
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+<meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    
+<meta name="generator" content="Jekyll v4.1.1">
+    <title>Escola Secundaria Nelson Mandela</title>
+
+   
+ <!-- Bootstrap core CSS -->
+<link href={% static 'bootstrap.min.css' %} rel="stylesheet">
+
+   
+ <style>
+      
+.bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <link href={% static "blog.css" %} rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+  <header class="blog-header py-3">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+      <div class="col-4 pt-1">
+        <a class="text-muted" href="#">Registrar-me</a>
+      </div>
+      <div class="col-4 text-center">
+        <a class="blog-header-logo text-dark" href="#">Bem-vindo a escola</a>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center">
+        <a class="text-muted" href="#" aria-label="Search"></a>
+        <a class="btn btn-sm btn-outline-secondary" href="#">Entrar</a>
+      </div>
+    </div>
+  </header><br>
+<a class="text-muted" href="#" aria-label="Search"><form method="post" style="text-align:center;items-align:center"><input type="search" name="procurar" placeholder="Procure aqui" class="btn btn-sm btn-outline-secondary">
+          <button style="border-radius:4erm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"></circle><path d="M21 21l-5.2-5.2"></path></svg></button>
+       </form> </a><br>
+  <div class="nav-scroller py-1 mb-2">
+    <nav class="nav d-flex justify-content-between">
+      <a class="p-2 text-muted" href="sobreaescola/">Sobre a escola</a>
+      <a class="p-2 text-muted" href="entrar/">Entrar</a>
+      <a class="p-2 text-muted" href="comunicados/">Comunicados</a>
+      <a class="p-2 text-muted" href="imagensdaescola/">Imagens da escola</a>
+    </nav>
+  </div>
+
+  <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+    <div class="col-md-6 px-0">
+      <h1 class="display-4 font-italic">Bem-vindo a Escola Secundaria Nelson Mandela</h1>
+      <p class="lead my-3">O site foi criado por alunos da 12 Classe Turma B5 para oferecer aos alunos e professores um facil acesso aos conteudos da escola.<br>Para mais informacoes contacte: +258874473105</p>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">Comunicados</strong>
+          <h3 class="mb-0">Ultimo comunicado.</h3>
+          <div class="mb-1 text-muted">Nov 12</div>
+          <p class="card-text mb-auto">Mais comunicados.</p>
+          <a href="comunicados/" class="stretched-link">Ver mais comunicados ...</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder:Bem-vindo aos comunicados da nossa escola"><title>Comunicados</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Comunicados</text></svg>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-success">Trabalhos</strong>
+          <h3 class="mb-0">Ultimo trabalho.</h3>
+          <div class="mb-1 text-muted">Nov 11</div>
+          <p class="mb-auto">Mais trabalhos.</p>
+          <a href="trabalhos/" class="stretched-link">Ver mais trabalhos ...</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Trabalhos</text></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </aside><!-- /.blog-sidebar -->
+
+  </div><!-- /.row -->
+
+</main><!-- /.container -->
+
+<footer class="blog-footer">
+  <p>
+    <a href="#">Ir ao topo</a>
+  </p>
+</footer>
+
+
+</body></html>

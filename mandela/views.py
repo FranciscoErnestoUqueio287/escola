@@ -8,6 +8,7 @@ from django.views.generic import CreateView
 import random
 from django.utils import translation, timezone
 from django.views.decorators.csrf import csrf_exempt
+from django.urls.base import reverse
 from django.db.models import Q
 import random
 #from django.contrib.gis.geos.Point
@@ -147,17 +148,17 @@ class criaa(CreateView):
                         return redirect("/a/")
                 else:
                     erro = "Não foi possivel criar essa conta porque esse numero de processo esta sendo usado"
-                    return render(request, "sign.html",{"erro":erro})
+                    return render(request, "sign.html",{"erro":erro+str(form.errors),"user":request.POST})
             else:
                 erro = "O password tem de ter mais de 8 carateres ou os passwords são diferentes, por favor insira o mesmo valor para cada"
-                return render(request, "sign.html",{"erro":erro})
+                return render(request, "sign.html",{"erro":erro,"user":request.POST})
         else:
-            erro =""
+            erro ="Houve um erro que actualmente não sabemos qual"
             if len(request.POST['nome']) <= 1:
                 erro = "Preencha o nome correctamente"
             elif len(request.POST['password']) < 8:
                 erro = "A palavra passe tem de ser bem definida e tem de ter mais de 8 carateres"
-            return render(request, "sign.html",{"erro":erro})
+            return render(request, "sign.html",{"erro":erro+str(form.errors),"user":request.POST})
 
 class criap(CreateView):
     template_name = "signp.html"
@@ -177,60 +178,63 @@ class criap(CreateView):
                 else:
                     return redirect("/p/")
             else:
-                erro = "Os passwords são diferentes, por favor insira o mesmo valor para cada e tem de conter mais de 8 carateres"
-                return render(request, "signp.html",{"erro":erro})
+                erro = "Os passwords são diferentes, por favor insira o mesmo valor para cada e tem de conter mais de 8 carateres"+str(form.errors)
+                return render(request, "signp.html",{"erro":erro,"user":request.POST})
         else:
             erro =""
             if len(request.POST['nome']) > 0:
-                erro = "Preencha o nome correctamente"
+                erro = "Preencha o nome correctamente"+str(form.errors)
             elif len(request.POST['password']) > 0:
-                erro = "A palavra passe tem de ser bem definida"
-            return render(request, "signp.html",{"erro":erro})
+                erro = "A palavra passe tem de ser bem definida"+str(form.errors)
+            return render(request, "signp.html",{"erro":erro,"user":request.POST})
 def entrar(request):
     return render(request,"dir.html")
 def upaluno(request,pk):
     if request.method == "POST":
-        e = request.POST["group"]
-        try:
-            n = request.POST["thevalue"]
-        except:
-            n = request.FILES["thevalue"]
         user = aluno.objects.filter(slug=pk).first()
-        c = request.META.get("PATH_INFO")
-        c = c.split("/")
-        c = [c[0],c[1],c[2]]
-        c = "/".join(c)
-        q = None
-        if user == None:
-            return render(request,"404.html",{"relatorio":"Impossivel concluir a accao desejada"})
-        else:
-            if e == "nome" and len(n) > 10:
-                user.nome = n
-            elif e == "contacto":
-                user.contacto = n
-            elif e == "idade":
-                user.data_de_nascimento = n
-            elif e == "turma":
-                user.turma = n
-            elif e == "imagem":
-                user.imagem = n
-            elif e == "classe":
-                user.classe = n
-            elif e == "password":
-                user.password = n
-            elif e == "numero_de_processo":
-                r = aluno.objects.filter(numero_de_processo=n)
-                if r == None:
-                    user.numero_de_processo = n
-                else:
-                    pass
-            elif e == "encarregado":
-                user.encarregado = n
-            elif e == "sala":
-                user.sala = n
-            elif e == "turno":
-                if n.lower() in ("diurno","noturno"):
-                    user.turno = n.lower()
+        if user != None:
+            try:
+                if request.POST["nome"] != user.nome:
+                    n = request.POST["nome"]
+                    if len(n) > 9:
+                        user.nome = n
+                if request.POST["numero_de_processo"] != user.numero_de_processo:
+                    n = request.POST["numero_de_processo"]
+                    if int(n) > 1000:
+                        user.numero_de_processo = int(n)
+                if request.POST["data_de_nascimento"] != user.data_de_nascimento:
+                    n = request.POST["data_de_nascimento"]
+                    if len(n) > 3:
+                        user.data_de_nascimento = n
+                if request.POST["encarregado"] != user.encarregado:
+                    n = request.POST["encarregado"]
+                    if len(n) > 9:
+                        user.encarregado = n
+                if request.POST["contacto"] != user.contacto:
+                    n = request.POST["contacto"]
+                    if len(n) > 8:
+                        user.contacto = n
+                if request.POST["sala"] != user.sala:
+                    n = request.POST["sala"]
+                    if int(n) > 0 and int(n) < 33:
+                        user.sla = int(n)
+                if request.POST["turno"] != user.turno:
+                    n = request.POST["turno"]
+                    if n in ("diurno","noturno"):
+                        user.turno = n
+                if request.POST["turma"] != user.turma:
+                    n = request.POST["turma"]
+                    if len(n) >= 2:
+                        user.turma = n
+                if request.POST["classe"] != user.classe:
+                    n = request.POST["classe"]
+                    if int(n) > 7 and int(n) < 13:
+                        user.classe = int(n)
+                if len(request.FILES["imagem"]) > 3:
+                    n = request.FILES["imagem"]
+                    user.imagem = n
+            except:
+                pass
             user.save()
             return render(request,"upping.html",{'user':user})
         return render(request,"404.html",{"relatorio":"Impossivel concluir a accao desejada"})
@@ -352,17 +356,17 @@ class criad(CreateView):
                     return redirect("/d/"+str(i.slug)+"/")
                 else:
                     erro = "A conta ja existe"
-                    return render(request, "signd.html",{"erro":erro})
+                    return render(request, "signd.html",{"erro":erro,"user":request.POST})
             else:
-                erro = "Os passwords são diferentes, por favor insira o mesmo valor para cada e verifique se a palavra-passe tem mais de 8 carateres"
-                return render(request, "signd.html",{"erro":erro})
+                erro = "Os passwords são diferentes, por favor insira o mesmo valor para cada e verifique se a palavra-passe tem mais de 8 carateres"+str(form.errors)
+                return render(request, "signd.html",{"erro":erro,"user":request.POST})
         else:
             erro =""
             if len(request.POST['nome']) > 0:
-                erro = "Preencha o nome correctamente"
+                erro = "Preencha o nome correctamente"+str(form.errors)
             elif len(request.POST['password']) > 0:
-                erro = "A palavra passe tem de ser bem definida"
-            return render(request, "signd.html",{"erro":erro})
+                erro = "A palavra passe tem de ser bem definida"+str(form.errors)
+            return render(request, "signd.html",{"erro":erro,"user":request.POST})
 
 
 def pr(request,pk):
@@ -934,12 +938,12 @@ def comal(request,pk):
                         sucesso = "Sem sucesso, impossivel comunicar um texto com menos de 10 palavras"
                 mcom = comunicados.objects.filter(de=user.id,de2="aluno",comunicando=user.nome).all()
                 com = comunicados.objects.all()
-                return render(request,"comunicados.html",{"user":user,"mcom":mcom,"com":com,"sucesso":sucesso})
+                return render(request,"comunicados.html",{"user":user,"mcom":mcom,"comunicados":com,"sucesso":sucesso})
         else:
             if user != None:
                 mcom = comunicados.objects.filter(de=user.id,de2="aluno",comunicando=user.nome).all()
                 com = comunicados.objects.all()
-                return render(request,"comunicados.html",{"user":user,"mcom":mcom,"com":com,"sucesso":"Bem-vindos aos comunicados"})
+                return render(request,"comunicados.html",{"user":user,"mcom":mcom,"comunicados":com,"sucesso":"Bem-vindos aos comunicados"})
             else:
                 return render(request,"404.html",{"relatorio":"Impossivel concluir a accao desejada"})
     else:
@@ -1049,12 +1053,12 @@ def tral(request,pk):
                         sucesso = "Sem sucesso, impossivel criar trabalho com um texto com menos de 10 letras"
                 mcom = trabalho.objects.filter(de=user.id,de2="aluno",comunicando=user.nome).all()
                 com = trabalho.objects.all()
-                return render(request,"trabalho.html",{"user":user,"mcom":mcom,"com":com,"sucesso":sucesso})
+                return render(request,"trabalho.html",{"user":user,"mcom":mcom,"comunicados":com,"sucesso":sucesso})
         else:
             if user != None:
                 mcom = trabalho.objects.filter(de=user.id,de2="aluno",comunicando=user.nome).all()
                 com = trabalho.objects.all()
-                return render(request,"trabalho.html",{"user":user,"mcom":mcom,"com":com,"sucesso":"Bem-vindos aos comunicados"})
+                return render(request,"trabalho.html",{"user":user,"mcom":mcom,"comunicados":com,"sucesso":"Bem-vindos aos comunicados"})
             else:
                 return render(request,"404.html",{"relatorio":"Impossivel concluir a accao desejada"})
     else:
@@ -1279,11 +1283,11 @@ def crtp(request,pk):
                         if x == "imagem":
                             pass
                         else:
-                            return render(request,"signt.html",{"erro":"Falha, verifique as informacoes acima sobre o "+str(x)})
+                            return render(request,"signtrpr.html",{"erro":"Falha, verifique as informacoes acima sobre o "+str(x)})
                 if len(request.POST["director_de_turma"]) > 9 and len(request.POST["password"]) > 9:
                     pass
                 else:
-                    return render(request,"signt.html",{"erro":"Falha, garanta que o director de turma e o password tenham mais de 10 carateres"})
+                    return render(request,"signtrpr.html",{"erro":"Falha, garanta que o director de turma e o password tenham mais de 10 carateres"})
                 if request.POST["password"] == request.POST["password2"]:
                     r = turma.objects.filter(slug=request.POST["csrfmiddlewaretoken"]).first()
                     if r == None:
@@ -1296,9 +1300,9 @@ def crtp(request,pk):
                     t.save()
                     return redirect("/p/"+str(user.slug)+"/")
                 else:
-                    return render(request,"signt.html",{"user":user,"erro":"Os password tem de ser iguais"})
+                    return render(request,"signtrpr.html",{"user":user,"erro":"Os password tem de ser iguais"})
             else:
-                return render(request,"signt.html",{"user":user})
+                return render(request,"signtrpr.html",{"user":user})
         else:
             return render(request,"404.html",{"relatorio":"Impossivel concluir a accao desejada"})
     else:
@@ -1442,3 +1446,80 @@ def prseealuno(request,pk,pl):
             return render(request,"404.html",{"relatorio":"Impossivel concluir a accão desejada"})
     else:
         return render(request,"404.html",{"relatorio":"Impossivel concluir a accão desejada"})
+def col(request,pk):
+    if pk!=None:
+        user = aluno.objects.filter(slug=pk).first()
+        if user != None:
+            if request.method == "POST":
+                e = request.POST["search"]
+                colegas = aluno.objects.filter(Q(nome=e)|Q(nome__contains=e)).all()
+                return render(request,"colegas.html",{"colegas":colegas,"user":user})
+            else:
+                colegas = aluno.objects.filter(turma=user.turma).all()
+                return render(request,"colegas.html",{"colegas":colegas,"user":user})
+        else:
+            return render(request,"404.html",{"relatorio":"Não possivel acessar a sua conta"})
+def chat(request,pk):
+    if pk!=None:
+        user = aluno.objects.filter(slug=pk).first()
+        if user != None:
+            if request.method == "POST":
+                e = request.POST["grupo"]
+                if e == "procurar":
+                    e = request.POST["search"]
+                    m = messagens.objects.filter(conteudo__contains=e).all()
+                    m = conversa.objects.filter(messagem=m).all()
+                    return render(request,"mensagens.html",{"user":user,"conversas":m})
+                elif e == "enviar":
+                    m = conversas.objects.filter(Q(de=user.id,de2="aluno")|Q(para=user.id,para2="aluno")).all()
+                    e = {}
+                    e["para"] = request.POST["para"]
+                    e["contacto"] = request.POST["contacto"]
+                    e["conteudo"] = request.POST["conteudo"]
+                    try:
+                        e["arquivo"] = request.FILES["arquivo"]
+                        me = messagems(conteudo=e["conteudo"],arquivo=e["arquivo"])
+                        c = e["contacto"]
+                        t = request.POST["para"]
+                        if t == "professor":
+                            user2 = professor.objects.filter(contacto=c).first()
+                        elif t == "aluno":
+                            user2 = aluno.objects.filter(contacto=c).first()
+                        elif t == "directoria":
+                            user2 = directoria.objects.filter(contacto=c).first()
+                        if user2 == None:
+                            pa = "Nao existe tal contacto de numero %s"%c
+                            return render(request,"mensagens.html",{"user":user,"conversas":m,"erro":pa,"arquivo":e["arquivo"],"contacto":e["contacto"],"conteudo":e["conteudo"]})
+                        else:
+                            me.save()
+                            con = conversas(de=user.id,de2="aluno",para=user2.id,para2=t,messagem=me)
+                            con.save()
+                            return render(request,"mensagens.html",{"user":user,"conversas":m,"erro":con})
+                    except:
+                        if len(e["conteudo"]) > 10:
+                            t = request.POST["para"]
+                            me = messagems(conteudo=e["conteudo"],arquivo="")
+                            c = e["contacto"]
+                            if t == "professor":
+                                user2 = professor.objects.filter(contacto=c).first()
+                            elif t == "aluno":
+                                user2 = aluno.objects.filter(contacto=c).first()
+                            elif t == "directoria":
+                                user2 = directoria.objects.filter(contacto=c).first()
+                            if user2 == None:
+                                pa = "Nao existe tal contacto de numero %s"%c
+                                return render(request,"mensagens.html",{"user":user,"conversas":m,"erro":pa,"contacto":e["contacto"],"conteudo":e["conteudo"]})
+                            else:
+                                me.save()
+                                con = conversas(de=user.id,de2="aluno",para=user2.id,para2=t,messagem=me)
+                                con.save()
+                                return render(request,"mensagens.html",{"user":user,"conversas":m,"erro":con})
+                        else:
+                            pa = "Não tem conteudo suficiente, tem de ter mais de 10 carateres"
+                            m = conversas.objects.filter(Q(de=user.id,de2="aluno")|Q(para=user.id,para2="aluno")).all()
+                            return render(request,"mensagens.html",{"user":user,"conversas":m,"erro":pa,"contacto":e["contacto"],"conteudo":e["conteudo"]})
+            else:
+                m = conversas.objects.filter(Q(de=user.id,de2="aluno")|Q(para=user.id,para2="aluno")).all()
+                return render(request,"mensagens.html",{"user":user,"conversas":m})
+        else:
+            return render(request,"404.html",{"relatorio":"Não possivel acessar a sua conta"})

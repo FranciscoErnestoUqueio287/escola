@@ -1,0 +1,88 @@
+﻿<!doctype html>
+{% load static %}<html lang="pt">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+<meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+   
+ <meta name="generator" content="Jekyll v4.1.1">
+    <title>Colegas</title>
+
+    
+<link href={% static 'bootstrap.min.css' %} rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="offcanvas.css" rel="stylesheet">
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+  <a class="navbar-brand mr-auto mr-lg-0" href={% url 'paginainicial' %}>Pagina inicial</a>
+  <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+<div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+    
+<ul class="navbar-nav mr-auto">
+     
+
+ <li class="nav-item active">
+       
+ <a class="nav-link" href={% url 'aluno_dentro' user.slug %}>Voltar</a>      </li>
+       </ul>
+  
+  <form method="post" class="form-inline my-2 my-lg-0"> {% csrf_token %}
+      <input class="form-control mr-sm-2" type="text" name="search" value="{{seached}}" placeholder="Procure aqui" aria-label="Search">
+     
+ <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Procurar</button>
+    </form>
+  </div>
+</nav>
+
+<div class="nav-scroller bg-white shadow-sm">
+  
+
+</div>
+
+<main role="main" class="container">
+  <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded shadow-sm">
+    
+{% if user.imagem|length > 0 %}<img class="mr-3" src="{{user.imagem.url}}" alt="" width="48" height="48"> {% endif %}
+   
+ <div class="lh-100">
+     
+ <h6 class="mb-0 text-white lh-100">{{user.nome}}</h6>
+      <small>Bem-vindo</small>
+    </div>
+  </div>
+
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+   
+ <h6 class="border-bottom border-gray pb-2 mb-0">Teus colegas da turma: {{user.turma}}  classe: {{user.classe}}</h6>
+    {% if colegas|length > 0 %} {% for x in colegas %}<div class="media text-muted pt-3">
+      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title></title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark">{{x.nome}}</strong>
+
+Turma:{{x.turma}}, classe:{{x.classe}}, contacto{{x.contacto}}, <a href={% url 'aluno_turma_ver' user.slug x.slug %}>ver mais</a></p>
+    </div>
+ {% endfor %}   {% endif %}

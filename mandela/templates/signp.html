@@ -1,18 +1,123 @@
-<!DOCTYPE html>
-<head><meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1"/>{% load static %}<link rel="shortcut icon" href={% static 'favicon.ico' %}><link rel="stylesheet" href={% static 'mystyle.css' %}>
-<style>h2{color:#800000}
-h1{color:#800000}
-</style></head>
-<body><form method="post" enctype='multipart/form-data' class="aluno-form"> <h1>{{erro}}<h1><br> {% csrf_token %} 
-<h2>Nome:</h2><br> <input type="text" name="nome" class="text" maxlength="100" required id="id_nome"> <br>
-<h2>Data de nascimento:</h2><br> <input type="date" class="text" name="data_de_nascimento" required id="id_data_de_nascimento"> <br>
-<h2>Imagem:</h2><br> <input type="file" name="imagem" class="text" accept="image/*" required id="id_imagem"> <br>
-<h2>Classes:</h2><br><h2>Exemplo:12,11,10,9,8<h2> <input type="text" class="text" name="classes" value="" required id="id_contacto"> <br>
-<h2>Contacto:</h2><br> <input type="text" class="text" name="contacto" value="+258" maxlength="13" required id="id_contacto"> <br>
-<h2>Turmas:</h2> <br><h2>Exemplo:A,B,C<h2><input type="text" class="text" placeholder="B,A,C" name="turmas" maxlength="100" required id="id_turmas"> <br>
-<h2>Palavra-passe:</h2><br> <input type="password" name="password" class="text" maxlength="100" required id="id_password"><br>
-<h2>Confirmacao da palavra passe:</h2> <br><input type="password" class="text" name="password2" maxlength="100" required id="id_password">
-<br><input type="submit" value="Subscrever-me" class="text">
+<!doctype html>
+<html lang="pt">
+ {% load static %}  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+<meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    
+<meta name="generator" content="Jekyll v4.1.1">
+    <title>Login</title>
+
+    
+
+<link href={% static 'bootstrap.min.css' %} rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href={% static "floating-labels.css" %} rel="stylesheet">
+  </head>
+  <body>
+    
+
+<br>
+<form class="form-signin" method="post" enctype="multipart/form-data">
+ {% csrf_token %}
+ <div class="text-center mb-4">
+  
+ 
+   <h1 class="h3 mb-3 font-weight-normal">Preencha o formulario e registre-se</h1>
+   
+ <p>{% if form.errors %} {{form.errors}} {% endif %}{{erro|default:"Se o registro falhar venha para aqui para ver e corrigir o erro"}}</p>
+  </div>
+
+    <div class="form-label-group">
+    
+<input type="text" id="inputPassword" name="nome" value="{{user.nome}}" class="form-control" placeholder="Seu nome" required>
+    
+<label for="inputPassword">Nome</label>
+  </div>
+
+ 
+
+<div class="form-label-group">
+   
+ <input type="date" value={{user.data_de_nascimento}} id="inputEmail" name="data_de_nascimento" class="form-control">
+   
+ <label for="inputEmail">Data de nascimento</label>
+  </div>
+
+ 
+
+<div class="form-label-group">
+   
+ <input type="tel" id="inputEmail" name="contacto" value="{{user.contacto}}" class="form-control" placeholder="Contacto" required>
+   
+ <label for="inputEmail">Contacto</label>
+  </div>
+
+  <div class="form-label-group">
+    
+</div>
+
+<div class="form-label-group">
+   
+ <input type="text" id="inputEmail" name="turmas" value="{{user.turmas}}" class="form-control" placeholder="Turmas" required>
+   
+ <label for="inputEmail">Turmas Exemplo:B5,B</label>
+  </div>
+
+  <div class="form-label-group">
+    
+<input type="text" name="classes" id="inputPassword" value="{{user.classes}}" class="form-control" placeholder="Classes" required>
+    
+<label for="inputPassword">Classes Exemplo:12,9,8</label>
+   </div>
+
+  <div class="checkbox mb-3">
+  </div>
+ 
+
+<div class="form-label-group">
+   
+  
+<input type="password" name="password" value="{{user.password}}" id="inputPassword" class="form-control" placeholder="Palavra-passe" required>
+    
+<label for="inputPassword">Palavra-passe</label>
+  </div> <div class="form-label-group">
+<input type="password" name="password2" value="{{user.password}}" id="inputPassword" class="form-control" placeholder="Confirmar alavra-passe" required>
+    
+<label for="inputPassword">Confirmar palavra-passe</label>
+   </div>
+
+ 
+<div class="form-label-group">
+   
+ <input type="file" id="inputEmail" accept="image/*" name="imagem" value="{{user.imagem.url}}" class="form-control" placeholder="Imagem de face">
+   
+ <label for="inputEmail">Imagem de face</label>
+  </div>
+
+
+<button class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>
+ 
+ <p class="mt-5 mb-3 text-muted text-center">Escola Secundaria Nelson Mandela</p>
+</form>
 </body>
 </html>

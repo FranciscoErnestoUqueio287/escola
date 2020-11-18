@@ -1,0 +1,106 @@
+﻿<!doctype html>
+<html lang="en">{% load static %} 
+ <head>
+    <meta charset="utf-8">
+    
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+<meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    
+<meta name="generator" content="Jekyll v4.1.1">
+    
+<title>{{user.nome}}</title>
+
+ 
+<link href={% static "bootstrap.min.css" %} rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+<link href={% static 'jumbotron.css' %} rel="stylesheet">
+  </head>
+  <body>
+    
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href={% url "paginainicial" %}>Ir a pagina inicial</a>
+  
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+     
+   <a class="nav-link" href="turmas/">Turmas</a>
+    </li>
+          
+  <a class="nav-link" href="trabalhos/">Trabalhos</a>
+<a class="nav-link" href="colegas/">Colegas</a>
+   <a class="nav-link" href="comunicados/">Comunicados</a> <a class="nav-link" href="messagens/">Conversas</a>
+   
+   </ul>
+ <form class="form-inline my-2 my-lg-0">
+      
+<input class="form-control mr-sm-2" type="text" name="procurar" placeholder="Procurar" aria-label="Search">
+      
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Procurar</button>
+    </form>
+  
+</div>
+</nav>
+
+<main role="main">
+
+
+ 
+ <div class="jumbotron">
+    <div class="container">
+     
+ <h1 class="display-3">Bem-vindo {{user.nome}}</h1>
+     
+ <p>Que estuda na turma {{user.turma}} da sala {{user.sala}}</p>
+        <p><a class="btn btn-secondary" href="myinfo/" role="button">Ver ou alterar meus dados</a></p>
+      </div>
+      <div class="col-md-4">
+
+        <h2>Comunicados</h2>
+        <p>Podes publicar ler ou mesmo ve-los.</p>
+        <p><a class="btn btn-secondary" href="comunicados/" role="button">Ver todos comunicados</a></p>
+     </div><div class="col-md-4">
+
+        <h2>Trabalhos</h2>
+        <p>Podes publicar ler ou mesmo ve-los.</p>
+        <p><a class="btn btn-secondary" href="trabalhos/" role="button">Ver todos trabalhos</a></p>
+  </div> {% if trabalhos|length > 0 %}         <h2>Trabalhos</h2>
+        {% for x in trabalhos %}<p>{{x}}<br>{% if x.comunicado|length > 0 %}{{x.comunicado|truncatechars:30}}<br>{% endif %} {% if x.arquivo|length > 0 %}Baixar arquivo :<a href={{x.arquivo.url}} >{{x.arquivo}}</a><br>{% endif %}<br></p>
+        <p><a class="btn btn-secondary" href="trabalhos/commfgjk{{x.id}}" role="button">Ver mais</a></p>{% endfor %}{% endif %}.
+   {% if comunicados|length > 0 %}         <h2>Comunicados</h2>
+        {% for x in comunicados %}<p>{{x}}<br>{% if x.comunicado|length > 0 %}{{x.comunicado|truncatechars:30}}<br>{% endif %} {% if x.arquivo|length > 0 %}Baixar arquivo :<a href={{x.arquivo.url}} >{{x.arquivo}}</a><br>{% endif %}<br></p>
+        <p><a class="btn btn-secondary" href="comunicados/commfgjk{{x.id}}" role="button">Ver mais</a></p>{% endfor %}{% endif %}.
+   </div>
+
+    <hr>
+
+  </div>
+</main>
+
+<footer class="container">
+Escola Secundaria Nelson Mandela, Matola-rio 2004-2020</p>
+</footer></html>

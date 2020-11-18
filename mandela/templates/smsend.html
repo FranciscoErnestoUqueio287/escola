@@ -5,29 +5,22 @@
 
 <script>
 </script>
-<style> 
-body{background-color:darkcyan}
+<style>
 .forma{background-color:cyan}
 .forma:hover{background-color:cyan}
 .tt{width:100%;height:40%}
-h2:hover{color:#800000} h3{color:aqua;text-align:center;font-family:Lucida Calligraphy;font-size:25px;font-weight:bold}
-h2{color:#800000;position:justify;text-align:center;font-family:Lucida Calligraphy;font-size:25px;font-weight:bold}
-button{background-color:#2f6f71;color:color:#800000;border-radius:15px;height:20%;width:100%;font-size:100%;font-family:Lucida Calligraphy;font-weight:bold;box-shadow:-8px 8px 8px #cbced1, 8px 8px 8px #fff;}
-button:hover{color:color:#800000}
-.b{background-color:#2f6f71;color:color:#800000;border-radius:15px;height:20%;width:100%;font-size:100%;font-family:Lucida Calligraphy;font-weight:bold;box-shadow:-8px 8px 8px #cbced1, 8px 8px 8px #fff;}
-.b:hover{color:red}
 </style>
 </head>
-<body><a href={% url 'paginainicial' %}><button>Ir para a pagina inicial</button></a> <br><br> 
- <br><a href={% url 'aluno_dentro' user.slug %}><button>Voltar</button></a>
+<body><a href={% url 'paginainicial' %}><button class="btn btn-lg btn-primary btn-block">Ir para a pagina inicial</button></a> <br><br> 
+ <br><a href={% url 'aluno_dentro' user.slug %}><button class="btn btn-lg btn-primary btn-block">Voltar</button></a>
 <h2 style="color:green">{{sucesso}}</h2>
 <form method="post" enctype="multipart/form-data">
 {% csrf_token %}
-<h2>Que tipo de receptor</h2><select name="para" class="b"> <option>Aluno</option><option>Professor</option><option>Directoria</h2></select>
+<h2>Que tipo de receptor</h2><select name="para"> <option>Aluno</option><option>Professor</option><option>Directoria</h2></select>
 <h2>Contacto do receptor</h2><input type="text" class="tt" value="+258" name="receptor"> <br>
 <h2>Conteudo:</h2><input type="textarea" class="tt" name="conteudo" value=""><br>
 <h2>Anexar arquivo:</h2><input type="file" class="tt" name="arquivo"><br>
-<input type="submit" class="text" value="Enviar">
+<input type="submit" class="btn btn-lg btn-primary btn-block" value="Enviar">
 </form>
 </body>
 </html>
