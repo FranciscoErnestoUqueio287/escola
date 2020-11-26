@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'escola.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'vzylbgoo',
@@ -84,6 +84,13 @@ DATABASES = {
         'PASSWORD':'GFL7Wd5bCS0h-iNFt1eDEihNXtH2etXn',
         'HOST':'topsy.db.elephantsql.com',
         'PORT':'5432'
+
+    }
+}'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
