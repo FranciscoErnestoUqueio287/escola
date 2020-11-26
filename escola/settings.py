@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'escola',
-    #'mandela',
+    'mandela',
 ]
 
 MIDDLEWARE = [
