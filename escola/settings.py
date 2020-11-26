@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'vzylbgoo',
         'USER': 'vzylbgoo',
         'PASSWORD':'GFL7Wd5bCS0h-iNFt1eDEihNXtH2etXn',
-        'HOST':,'topsy.db.elephantsql.com',
+        'HOST':'topsy.db.elephantsql.com',
         'PORT':'5432'
     }
 }
