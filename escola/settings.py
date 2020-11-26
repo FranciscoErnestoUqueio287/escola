@@ -27,7 +27,7 @@ ALLOWED_HOSTS = ["esnm.herokuapp.com","localhost"]
 SECRET_KEY = 'wd_^5s^4ln2i8tk74v@w5&phi68fy8$e8aep=prn#c!=it@2lr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 # Application definition
 
 INSTALLED_APPS = [
