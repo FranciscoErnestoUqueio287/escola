@@ -627,7 +627,7 @@ def loga(request):
         if len(request.POST) > 0:
             a = aluno.objects.filter(contacto = request.POST['contacto'],password=request.POST['password']).first()
             if a == None:
-                erro = "Nenhum aluno encontrado usando tais dados, favor verifique os dados insiridos"
+                erro = "Nenhum aluno encontrado usando tais dados,  por favor verifique os dados insiridos"
                 return render(request,"loga.html",{"erro":erro})
             else:
                 return redirect("/a/"+str(a.slug)+"/")
@@ -642,7 +642,7 @@ def logp(request):
         if len(request.POST) > 0:
             a = professor.objects.filter(contacto = request.POST['contacto'],password=request.POST['password']).first()
             if a == None:
-                erro = "Nenhum professor encontrado usando tais dados, favor verifique os dados insiridos"
+                erro = "Nenhum professor encontrado usando tais dados, por favor verifique os dados insiridos"
                 return render(request,"loga.html",{"erro":erro})
             else:
                 return redirect("/p/"+str(a.slug)+"/")
@@ -657,7 +657,7 @@ def logd(request):
         if len(request.POST) > 0:
             a = directoria.objects.filter(contacto = request.POST['contacto'],password=request.POST['password']).first()
             if a == None:
-                erro = "Nenhum usuario encontrado usando tais dados, favor verifique os dados insiridos"
+                erro = "Nenhum usuario encontrado usando tais dados, por favor verifique os dados insiridos"
                 return render(request,"loga.html",{"erro":erro})
             else:
                 return redirect("/d/"+str(a.slug)+"/")
