@@ -75,22 +75,16 @@ WSGI_APPLICATION = 'escola.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-'''DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'vzylbgoo',
-        'USER': 'vzylbgoo',
-        'PASSWORD':'GFL7Wd5bCS0h-iNFt1eDEihNXtH2etXn',
-        'HOST':'topsy.db.elephantsql.com',
-        'PORT':'5432'
-
-    }
-}'''
+#postgres://czvqkvpqhnrsbe:4306553493be34a3cc72a21940bff4284662a6a9d29ea0150a3a806cb956c279@ec2-184-73-249-9.compute-1.amazonaws.com:5432/dec8b7b4aik1d9
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'NAME': 'vzylbgoo',
+        'USER': 'czvqkvpqhnrsbe',
+        'PASSWORD':'4306553493be34a3cc72a21940bff4284662a6a9d29ea0150a3a806cb956c279',
+        'HOST':'ec2-184-73-249-9.compute-1.amazonaws.com',
+        'PORT':'5432'
+
     }
 }
 import dj_database_url
